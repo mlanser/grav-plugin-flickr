@@ -1,4 +1,7 @@
 <div class="flickr2-error">
     <h3>FLICKR ERROR!</h3>
-    <p>{{ message }}</p>
+    <p class="message">{{ message }}</p>
+    {% if details %}
+    <p class="details">Object ID: {{ details.id }}<br />Message: {{ details.error }}</p>
+    {% endif %}
 </div>

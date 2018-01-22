@@ -31,7 +31,8 @@ class Flickr2PhotoShortcode extends Shortcode
                         ]);
                 } catch (Flickr2APIException $e) {
                     $output = $this->twig->processTemplate('partials/flickr2-error.html.twig', [
-                        'message' => ($config->get('plugins.flickr2.flickr_api_error_photo')) ?: $e->getMessage()
+                        'message' => ($config->get('plugins.flickr2.flickr_api_error_photo')) ?: $e->getMessage(),
+                        'details' => ($config->get('plugins.flickr2.flickr_api_error_details')) ? ['id' => $id, 'error' => $e->getMessage()] : []
                     ]);
                 }
 

@@ -53,7 +53,7 @@ class Flickr2API
     {
         //$this->grav['debugger']->addMessage($params);
         $info = $this->request(['method' => 'flickr.photosets.getInfo', 'photoset_id' => $id ])['photoset'];
-        $this->grav['debugger']->addMessage($info);
+        //$this->grav['debugger']->addMessage($info);
 
         $get_photos_params = array_merge(
             [
@@ -106,7 +106,6 @@ class Flickr2API
      */
     protected function request($params) {
         $query = http_build_query(array_merge($params, ['api_key' => $this->key, 'format' => 'php_serial', 'user_id' => $this->user_id]));
-        $this->grav['debugger']->addMessage($query);
 
         $url = 'https://api.flickr.com/services/rest/?' . $query;
 
@@ -118,7 +117,9 @@ class Flickr2API
         }
 
         $obj = unserialize(Response::get($url));
-        if($obj["stat"] != "ok") {
+        if ($obj['stat'] != 'ok') {
+            //$this->grav['debugger']->addMessage($obj);
+            //$this->grav['debugger']->addMessage($query);
             throw new Flickr2APIException($obj);
         }
 

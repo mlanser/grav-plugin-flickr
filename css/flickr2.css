@@ -18,8 +18,27 @@
     margin: 4px;
 }
 
-.flickr2-error h3 { margin: 0 0 8px 0; padding: 0; color: darkred; font-size: large; font-weight: bold; }
-.flickr2-error p  { margin: 0; padding: 0; color: darkred; font-size: medium; }
+.flickr2-error h3 {
+    margin: 0 0 8px 0;
+    padding: 0;
+    color: darkred;
+    font-size: large;
+    font-weight: bold;
+}
+
+.flickr2-error p.message {
+    margin: 0;
+    padding: 0;
+    color: darkred;
+    font-size: medium;
+}
+
+.flickr2-error p.details  {
+    margin: 8px 0 0 0;
+    padding: 0;
+    color: #303030;
+    font-size: smaller;
+}
 
 .flickr2-photo figcaption {
     font-size: smaller;

@@ -71,7 +71,7 @@ class Photo
      */
     public function url($format)
     {
-        (self::getGrav()['debugger'])->addMessage($this->info);
+        //(self::getGrav()['debugger'])->addMessage($this->info);
 
         if ($format == 'o' && !empty($this->info['originalsecret'])) {
             return $this->photoBaseURL() . $this->info['originalsecret'] . '_o.' . $this->info['originalformat'];
