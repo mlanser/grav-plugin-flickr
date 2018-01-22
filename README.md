@@ -1,5 +1,12 @@
-Grav Flickr Plugin
+Grav Flickr2 Plugin
 ==================
+
+Please note that this is a fork from the [Grav Flickr Plugin](https://github.com/GuLinux/grav-plugin-flickr) by [Marco Gulino](https://github.com/GuLinux). The original idea for this project was to fix a few issues and submit a PR. But I soon had changed so much and added quite a few tweaks that a fork seemed more appropriate.
+
+Overview
+--------
+
+_**-[ W.I.P ]-**_
 
 This plugin allows you to fetch flickr photos, photosets and collections, and display them in page.
 
@@ -10,6 +17,8 @@ Flickr data is provided via shortcodes, the `shortcode-core` plugin is therefore
 
 Quick usage
 -----------
+
+_**-[ W.I.P ]-**_
 
 First you must configure your Flickr account, getting an API key and secret.
 You should register to the [Flickr App Garden](https://www.flickr.com/services).
@@ -39,6 +48,8 @@ The id can usually be found on the url of the resource you are currently browsin
 
 Advanced Options
 ----------------
+
+_**-[ W.I.P ]-**_
 
 Each shortcode accepts additional values beside the `id` parameter.
 This is a list for each shortcode.

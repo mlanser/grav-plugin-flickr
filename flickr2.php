@@ -3,8 +3,7 @@ namespace Grav\Plugin;
 
 use Grav\Common\Plugin;
 
-
-class FlickrPlugin extends Plugin
+class Flickr2Plugin extends Plugin
 {
 
     /**
@@ -14,13 +13,16 @@ class FlickrPlugin extends Plugin
     {
         return [
             'onShortcodeHandlers' => ['onShortcodeHandlers', 0],
-//            'onTwigExtensions' => ['onTwigExtensions', 0],
+          //'onTwigExtensions' => ['onTwigExtensions', 0],
             'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
             'onPluginsInitialized' => ['onPluginsInitialized', 0],
         ];
     }
-    
-        public function onPluginsInitialized()
+
+    /**
+     * Initialize configuration
+     */
+    public function onPluginsInitialized()
     {
         $this->config = $this->grav['config'];
         $this->enable([
@@ -36,23 +38,28 @@ class FlickrPlugin extends Plugin
         $this->grav['twig']->twig_paths[] = __DIR__ . '/templates';
     }
 
-//    public function onTwigExtensions()
-//    {
-//        require_once(__DIR__ . '/twig/ShortcodeUITwigExtension.php');
-//        $this->grav['twig']->twig->addExtension(new FlickrTwigExtension());
-//    }
+    /*
+    public function onTwigExtensions()
+    {
+        require_once(__DIR__ . '/twig/ShortcodeUITwigExtension.php');
+        $this->grav['twig']->twig->addExtension(new FlickrTwigExtension());
+    }
+    */
 
     /**
-     * Initialize configuration
+     * Initialize ShortCode handlers
      */
     public function onShortcodeHandlers()
     {
         $this->grav['shortcode']->registerAllShortcodes(__DIR__.'/shortcodes');
     }
-    
+
+    /**
+     * Add current plugin CSS.
+     */
     public function onPageInitialized()
     {
-        $this->grav['assets']->addCss('plugin://flickr/css/flickr.css');
+        $this->grav['assets']->addCss('plugin://flickr2/css/flickr2.css');
     }
 
 }

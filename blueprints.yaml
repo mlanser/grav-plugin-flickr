@@ -1,14 +1,14 @@
-name: Flickr
-version: 1.0.6
-description: "This plugin provides flickr shortcodes for images and galleries"
+name: Flickr2
+version: 1.0.0
+description: "This plugin provides shortcodes for including Flickr images and galleries."
 icon: flickr
 author:
-  name: Marco Gulino
-  email: marco@gulinux.net
-  url: http://gulinux.net
-homepage: https://github.com/GuLinux/grav-plugin-flickr
+  name: Martin Lanser
+  email: martinlanser@gmail.com
+  url: http://martinlanser.com
+homepage: https://github.com/mlanser/grav-plugin-flickr2
 keywords: flickr, media
-bugs: https://github.com/GuLinux/grav-plugin-flickr/issues
+bugs: https://github.com/mlanser/grav-plugin-flickr2/issues
 license: GPLv3
 
 dependencies:

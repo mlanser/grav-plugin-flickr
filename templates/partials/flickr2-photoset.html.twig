@@ -1,0 +1,11 @@
+<div class="flickr2 flickr2-photoset {{ params['photosetClass'] }}">
+    <{{ params['photosetTitleTag'] }} class="flickr2-photoset-title">{{ photoset.title() }}</{{ params['photosetTitleTag'] }}>
+    {% if photoset.description() %}
+        <{{ params['photosetDescTag'] }} class="flickr2-photoset-description">{{ photoset.description() }}</{{ params['photosetDescTag'] }}>
+    {% endif %}
+    <section data-featherlight-gallery data-featherlight-filter=".flickr2-photo">
+        {% for photo in photoset.photos() %}
+            {% include 'partials/flickr2-photo.html.twig' %}
+        {% endfor %}
+    </section>
+</div>

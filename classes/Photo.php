@@ -1,56 +1,156 @@
 <?php
 
-namespace Grav\Plugin\Flickr;
+namespace Grav\Plugin\Flickr2;
 
-use Grav\Common\Grav;
+require_once(__DIR__.'/../classes/Common.php');
+
+use Grav\Plugin\Flickr2\Common;
+use Grav\Common\GravTrait;
 
 class Photo
 {
-    private $info;
-    
+    use GravTrait;
+
+    protected $info;
+
+    /**
+     * Constructor.
+     *
+     * @param $info
+     */
     public function __construct($info)
     {
         $this->info = $info;
     }
-    
-    public function id() {
+
+    /**
+     * Get Flickr photo/set/album/collection ID
+     *
+     * @return string
+     */
+    public function id()
+    {
         return $this->info['id'];
     }
 
-    public function title() {
+    /**
+     * Get Flickr photo title
+     *
+     * @return string
+     */
+    public function title()
+    {
         return $this->content($this->info['title']);
     }
-    
-    public function datetaken() {
-        return $this->content($this->info['datetaken']);
-    }
-    
-    public function url($format) {
-        if($format == 'o' && $this->info['originalsecret']) {
-            return 'https://farm' . $this->info['farm'] . '.staticflickr.com/' . $this->info['server'] . '/' . $this->info['id'] . '_' . $this->info['originalsecret'] . '_o.' . $this->info['originalformat'];
-        }
-        if(in_array($format, ['s', 'q', 't', 'm', 'n', 'z', 'c', 'b', 'h', 'k'])) {
-            return 'https://farm' . $this->info['farm'] . '.staticflickr.com/' . $this->info['server'] . '/' . $this->info['id'] . '_' . $this->info['secret'] . '_' . $format . '.jpg';
-        }
-        return 'https://farm' . $this->info['farm'] . '.staticflickr.com/' . $this->info['server'] . '/' . $this->info['id'] . '_' . $this->info['secret'] . '.jpg';
-    }
-    
-    public function flickrPage() {
-        return 'https://www.flickr.com/photos/' . $this->username() . '/' . $this->info['id'];
-    }
-    
-    public function description() {
+
+    /**
+     * Get Flickr photo/set description
+     *
+     * @return string
+     */
+    public function description()
+    {
         return $this->content($this->info['description']);
     }
-    
-    private function content($val) {
+
+    /**
+     * Get Flickr photo 'date taken'
+     *
+     * @return string
+     */
+    public function datetaken()
+    {
+        return $this->content($this->info['datetaken']);
+    }
+
+    /**
+     * Create Flickr photo URL
+     *
+     * @param $format
+     * @return string
+     */
+    public function url($format)
+    {
+        (self::getGrav()['debugger'])->addMessage($this->info);
+
+        if ($format == 'o' && !empty($this->info['originalsecret'])) {
+            return $this->photoBaseURL() . $this->info['originalsecret'] . '_o.' . $this->info['originalformat'];
+        }
+
+        if (Common::isValidPhotoFormat($format)) {
+            return $this->photoBaseURL() . $this->info['secret'] . '_' . $format . '.jpg';
+        }
+
+        return $this->photoBaseURL() . $this->info['secret'] . '.jpg';
+    }
+
+    /**
+     * Generate URL to Flickr page for photo/set/album/collection
+     *
+     * @return string
+     */
+    public function flickrPage()
+    {
+        return 'https://www.flickr.com/photos/' . $this->username() . '/' . $this->info['id'];
+    }
+
+    /**
+     * Get ???
+     *
+     * @param $val
+     * @return mixed
+     */
+    protected function content($val)
+    {
         return is_array($val) ? $val['_content'] : $val;
     }
-    
-    private function username() {
-        if(array_key_exists ('ownername', $this->info))
+
+    /**
+     * Get Flicker username/NSID for owner of photo/set
+     *
+     * @return string
+     */
+    protected function username()
+    {
+        if (!empty($this->info['ownername'])) {
             return $this->info['ownername'];
-        return $this->info['owner']['path_alias'];
+        }
+
+        if (!empty($this->info['owner']['path_alias']) && is_string($this->info['owner']['path_alias'])) {
+            return $this->info['owner']['path_alias'];
+        }
+
+        return $this->getNSID();
     }
+
+    /**
+     * Get Flickr NSID for owner of images. If we can't determine NSID from photo info,
+     * then we'll use 'flickr_user_id' from our plugin config YAML as fallback option.
+     *
+     * @return string
+     */
+    protected function getNSID()
+    {
+        if (!empty($this->info['owner']['nsid'])) {
+            return $this->info['owner']['nsid'];
+        }
+
+        if (!empty($this->info['owner']) && is_string($this->info['owner'])) {
+            return $this->info['owner'];
+        }
+
+        return (self::getGrav()['config'])->get('plugins.flickr2.flickr_user_id');
+    }
+
+    /**
+     * Create Flickr photo base URL. This segment is common for all photo formats, etc.
+     *
+     * @return string
+     */
+    protected function photoBaseURL()
+    {
+        return 'https://farm'. $this->info['farm'] .'.staticflickr.com/'. $this->info['server'] .'/'. $this->info['id'] .'_';
+    }
+
 }
  

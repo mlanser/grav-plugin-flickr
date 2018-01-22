@@ -1,7 +1,0 @@
-<a href="#" data-featherlight="#lightbox-{{ photo.id() }}" class="flickr-photo {{params['photo-class']}}">
-    <figure>
-        <img src="{{ photo.url(params['display-format-photo']) }}">
-        <figcaption>{{ photo.title() }}</figcaption>
-    </figure>
-</a>
-{% include 'partials/flickr-photo-lightbox.html.twig' %}

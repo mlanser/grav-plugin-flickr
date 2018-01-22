@@ -1,0 +1,46 @@
+.flickr2-lightbox {
+    display: none;
+    text-align: center;
+}
+
+.flickr2-photo {
+    display: inline-block;
+    min-width: 150px;
+    text-align: center;
+    padding: 20px;
+}
+
+.flickr2-error {
+    background: white;
+    color: darkred;
+    border: 1px solid darkred;
+    padding: 4px 8px;
+    margin: 4px;
+}
+
+.flickr2-error h3 { margin: 0 0 8px 0; padding: 0; color: darkred; font-size: large; font-weight: bold; }
+.flickr2-error p  { margin: 0; padding: 0; color: darkred; font-size: medium; }
+
+.flickr2-photo figcaption {
+    font-size: smaller;
+}
+
+.flickr2-photoset-title {
+}
+
+.flickr2-photoset-description {
+}
+
+.flickr2-lightbox-links a {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.flickr2-lightbox-title {
+    /*     display: inline; */
+}
+
+.featherlight-next:hover span,
+.featherlight-previous:hover span {
+    text-shadow: 0 0 5px #111111;
+}

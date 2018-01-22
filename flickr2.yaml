@@ -1,0 +1,8 @@
+enabled: true
+flickr_api_key: ""
+flickr_api_secret: ""
+flickr_api_error_photo: "Unable to find Flickr photo!"
+flickr_api_error_photoset: "Unable to find Flickr photo set!"
+flickr_api_error_collection: "Unable to find Flickr photo collection!"
+flickr_user_id: ""
+flickr_cache_duration: "7200"

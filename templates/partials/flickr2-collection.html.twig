@@ -1,0 +1,14 @@
+{% if count(collection.sets()) > 0 or not params['hideEmptyCollections'] %}
+<div class="flickr2 flickr2-collection {{ params['collectionClass'] }}">
+    <{{ params['collectionTitleTag'] }}>{{ collection.title() }}</{{ params['collectionTitleTag'] }}>
+    {% if collection.description() %}
+        <{{ params['collectionDescTag'] }}>{{ collection.description() }}</{{ params['collectionDescTag'] }}>
+    {% endif %}
+    {% for set in collection.sets() %}
+        {% include 'partials/flickr2-photoset.html.twig' with {'photoset':set} %}
+    {% endfor %}
+    </div>
+{% endif %}
+{% for current in collection.collections() %}
+    {% include 'partials/flickr2-collection.html.twig' with {'collection':current} %}
+{% endfor %}

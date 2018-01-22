@@ -1,0 +1,19 @@
+<figure id="lightbox-{{ photo.id() }}" class="flickr2-lightbox {{ params['lightboxClass'] }}">
+    <figcaption>
+        <h4 class="flickr2-lightbox-title">{{ photo.title() }}</h4>
+        <div class="flickr2-lightbox-links">
+            {% set origVer = photo.url('o') %}
+            {% set flickrPage = photo.flickrPage() %}
+            {% if origVer %}
+                <a href="{{ photo.url('o') }}" target='_blank'><i class="fa fa-picture-o" aria-hidden="true"></i> Orig version</a>
+            {%  endif %}
+            {% if origVer %}
+                <a href="{{ photo.flickrPage() }}" target='_blank'><i class="fa fa-flickr" aria-hidden="true"></i> View in Flickr</a>
+            {%  endif %}
+        </div>
+    </figcaption>
+    <img src="{{ photo.url(params['lightboxFormat']) }}">
+    <div class="flickr2-lightbox-description">
+        {{ photo.description()|replace({"\n": "<br>"}) }}
+    </div>
+</figure>
